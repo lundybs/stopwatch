@@ -11,7 +11,6 @@ const stopwatchTime = document.querySelector('#stopwatchTime');
 //constant that should never change
 const laps = [];
 const intervalRate = 10;
-const liLap = document.createElement('li');
 
 //values that will change often
 let intervalId = null;
@@ -27,6 +26,7 @@ function formatTime(raw) {
     return `${zeroPad(minutes)}:${zeroPad(seconds.toFixed(2))}`
 }
 
+//start recording time
 function stopwatchStart(event) {
     event.preventDefault();
     console.log('Started');
@@ -34,11 +34,13 @@ function stopwatchStart(event) {
     intervalId = setInterval(stopwatchUpdate, intervalRate);
 }
 
+//display the tine in HTML
 function stopwatchUpdate() {
     rawTime += intervalRate;
     stopwatchTime.innerHTML = formatTime(rawTime);
 }
 
+//Stop or pause the time
 function stopwatchStop(event) {
     event.preventDefault();
     console.log("stopped");
@@ -46,6 +48,7 @@ function stopwatchStop(event) {
     clearInterval(intervalId);
 }
 
+//records the current time when button is clicked to a li list on webpage
 function stopwatchLap(event) {
     event.preventDefault();
     let printLapList = document.getElementById("lapList");
@@ -58,6 +61,7 @@ function stopwatchLap(event) {
     }
 }
 
+//resets time and array values
 function stopwatchReset(event) {
     clearInterval(intervalId);
     stopwatchTime.innerHTML = formatTime("0");
@@ -75,8 +79,7 @@ function zeroPad(value) {
 
 document.addEventListener("DOMContentLoaded", function () {
     console.log('ready!')
-    stopwatchTime.innerHTML = formatTime(rawTime);
-
+    stopwatchTime.innerHTML = formatTime(rawTime); //fromats the display for 0 to format time when page loads
 
     start.addEventListener("click", stopwatchStart);
     stop.addEventListener("click", stopwatchStop);
