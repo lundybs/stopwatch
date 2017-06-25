@@ -62,6 +62,9 @@ function stopwatchReset(event) {
     clearInterval(intervalId);
     stopwatchTime.innerHTML = formatTime("0");
     lapList.innerHTML = "";
+    while (laps.length > 0) {
+        laps.pop();
+    }
 }
 
 // adds a leading zero because humans like them
